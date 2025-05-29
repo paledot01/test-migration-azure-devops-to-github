@@ -1,4 +1,4 @@
-name: Azure Static Web Apps DEV
+name: Azure Static Web Apps PROD
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-  VITE_TEST_ENV: "test env :D"
+  VITE_TEST_ENV: ${{ secrets.VITE_TEST_ENV }}
 
 jobs:
   build_and_deploy_job:
