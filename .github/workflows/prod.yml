@@ -1,6 +1,7 @@
 name: Azure Static Web Apps PROD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
