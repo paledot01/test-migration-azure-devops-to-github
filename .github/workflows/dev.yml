@@ -1,6 +1,7 @@
-name: Azure Static Web Apps CI/CD
+name: Azure Static Web Apps DEV
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
@@ -11,9 +12,13 @@ on:
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    environment:
+      name: development
+    env:
+      VITE_TEST_ENV: ${{ vars.VITE_TEST_ENV }}
     steps:
       - uses: actions/checkout@v3
         with:
