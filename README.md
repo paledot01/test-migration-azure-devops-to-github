@@ -35,6 +35,14 @@ VITE_TEST_ENV: ${{ vars.VITE_TEST_ENV }}
 
 [Static Web App - preview environments](https://learn.microsoft.com/en-us/azure/static-web-apps/preview-environments)
 
+## Mirror parcial (para mantener historial de las ramas) :
+Esto sube solo una rama del clone bare, hacia el nuevo repositorio con la opción de poder cambiarle el nombre a la rama para el nuevo repositorio. Si quieres mantener el nombre de la rama original solo colocas el mismo en ambos lados.
+``` bash
+git clone --bare https://github.com/EXAMPLE-USER/OLD-REPOSITORY.git
+cd OLD-REPOSITORY
+git remote add github https://github.com/EXAMPLE-NEW-USER/NEW-REPOSITORY.git
+git push github OLD-BRANCH-NAME:NEW-BRANCH-NAME
+```
 ## El Entendimiento del deploy manual (basado en pruebas) :
 Una rama debe tener los workflows de los entornos en las que podría desplegar. Si una rama solo tiene un workflow para el entorno staging, esta rama solo podría ser desplegado a este entorno.
 Funciona igual para el despliegue manual, solo puedes desplegar una rama a un entorno especifico solo si esa rama tiene el workflow respectivo.
