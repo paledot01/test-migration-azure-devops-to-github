@@ -34,3 +34,16 @@ VITE_TEST_ENV: ${{ vars.VITE_TEST_ENV }}
 7. De forma predeterminada, al implementar un sitio en Azure Static Web Apps cada Pull Request implementa una version preliminar del sitio disponible a través de una dirección URL Temporal. Esta version del sitio le permite revisar los cambios antes de hacer merger al PR. Una vez cerrada el PR el entorno temporal desaparece.
 
 [Static Web App - preview environments](https://learn.microsoft.com/en-us/azure/static-web-apps/preview-environments)
+
+## El Entendimiento del deploy manual (basado en pruebas) :
+Una rama debe tener los workflows de los entornos en las que podría desplegar. Si una rama solo tiene un workflow para el entorno staging, esta rama solo podría ser desplegado a este entorno.
+Funciona igual para el despliegue manual, solo puedes desplegar una rama a un entorno especifico solo si esa rama tiene el workflow respectivo.
+
+#### Pasos para activar el despliegue manual en Github:
+1. En el Workflow agregar `workflow_dispatch` dentro de `on` y agregar esta condicional en el `if` dentro de `build_and_deploy_job`.
+2. Agregar este mismo workflow a la rama principal (`main`), esta rama es importante para GitHub, si no esta en esta rama no podrás desplegar manualmente.
+
+#### Pasos para activar el despliegue manual en VSCode:
+1. En el Workflow agregar `workflow_dispatch` dentro de `on` y agregar esta condicional en el `if` dentro de `build_and_deploy_job`.
+2. Descargar la extension “*Github Actions*” en VSCode.
+3. Logearte en la extención y verás un botón de “*play*”, que podrás apretar e indicando la rama que quieres desplegar (*refs/heads/dev*), funcionará siempre y cuando el mismo workflow este en dicha rama.
